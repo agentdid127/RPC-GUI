@@ -5,26 +5,36 @@ import com.agentdid127.resourcepack.PackConverter;
 import joptsimple.OptionSet;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Main {
-    private JPanel RPC;
-    private JComboBox comboBox1;
-    private JTextPane initalVersionTextPane;
-    private JComboBox comboBox2;
-    private JTextPane finalVersionTextPane;
-    private JCheckBox minifyCheckBox;
-    private JButton convertResourcePackButton;
-    private JTextArea consoleOutputTextArea;
 
 
     String from = "1.8";
     String to = "1.8";
     boolean minify = false;
+    private JPanel RPC;
+    private JPanel options;
+    private JLabel optionsLabel;
+    private JPanel versions;
+    private JCheckBox minifyCheckBox;
+    private JButton convertResourcePackButton;
+    private JLabel consoleLabel;
+    private JComboBox comboBox1;
+    private JLabel initalVersionLabel;
+    private JComboBox comboBox2;
+    private JLabel finalVersionLabel;
+    private JPanel console;
+    private JTextArea textArea1;
+
     public Main() {
         convertResourcePackButton.addActionListener(e -> {
 
@@ -78,7 +88,7 @@ public class Main {
     private void updateTextArea(final String text) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                consoleOutputTextArea.append(text);
+                textArea1.append(text);
             }
         });
     }
@@ -122,15 +132,64 @@ public class Main {
      */
     private void $$$setupUI$$$() {
         RPC = new JPanel();
-        RPC.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        RPC.setLayout(new GridBagLayout());
+        RPC.setBackground(new Color(-853249));
+        RPC.setForeground(new Color(-16777216));
+        console = new JPanel();
+        console.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        console.setBackground(new Color(-3154465));
+        GridBagConstraints gbc;
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        RPC.add(console, gbc);
+        consoleLabel = new JLabel();
+        consoleLabel.setBackground(new Color(-3154465));
+        consoleLabel.setForeground(new Color(-16777216));
+        consoleLabel.setText("Console");
+        console.add(consoleLabel);
+        final JScrollPane scrollPane1 = new JScrollPane();
+        console.add(scrollPane1);
+        textArea1 = new JTextArea();
+        textArea1.setBackground(new Color(-3154465));
+        textArea1.setColumns(80);
+        textArea1.setForeground(new Color(-16777216));
+        textArea1.setRows(18);
+        scrollPane1.setViewportView(textArea1);
+        options = new JPanel();
+        options.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        options.setBackground(new Color(-3154465));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        RPC.add(options, gbc);
+        options.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+        optionsLabel = new JLabel();
+        optionsLabel.setBackground(new Color(-3154465));
+        optionsLabel.setForeground(new Color(-16777216));
+        optionsLabel.setText("Options");
+        options.add(optionsLabel);
+        versions = new JPanel();
+        versions.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        versions.setBackground(new Color(-3154465));
+        options.add(versions);
+        versions.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.black), null, TitledBorder.LEFT, TitledBorder.DEFAULT_POSITION, this.$$$getFont$$$(null, -1, -1, versions.getFont()), new Color(-4473925)));
         comboBox1 = new JComboBox();
+        comboBox1.setBackground(new Color(-3154465));
+        comboBox1.setForeground(new Color(-16777216));
         final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
         defaultComboBoxModel1.addElement("1.8");
         defaultComboBoxModel1.addElement("1.9");
         defaultComboBoxModel1.addElement("1.10");
+        defaultComboBoxModel1.addElement("1.10.1");
+        defaultComboBoxModel1.addElement("1.10.2");
         defaultComboBoxModel1.addElement("1.11");
         defaultComboBoxModel1.addElement("1.11.1");
         defaultComboBoxModel1.addElement("1.11.2");
+        defaultComboBoxModel1.addElement("1.11.1");
+        defaultComboBoxModel1.addElement("1.11.2");
+        defaultComboBoxModel1.addElement("1.12");
+        defaultComboBoxModel1.addElement("1.12.1");
         defaultComboBoxModel1.addElement("1.12.2");
         defaultComboBoxModel1.addElement("1.13");
         defaultComboBoxModel1.addElement("1.13.1");
@@ -150,18 +209,28 @@ public class Main {
         defaultComboBoxModel1.addElement("1.16.4");
         defaultComboBoxModel1.addElement("1.16.5");
         comboBox1.setModel(defaultComboBoxModel1);
-        RPC.add(comboBox1);
-        initalVersionTextPane = new JTextPane();
-        initalVersionTextPane.setText("Inital Version");
-        RPC.add(initalVersionTextPane);
+        versions.add(comboBox1);
+        initalVersionLabel = new JLabel();
+        initalVersionLabel.setBackground(new Color(-3154465));
+        initalVersionLabel.setForeground(new Color(-16777216));
+        initalVersionLabel.setText("Inital Version");
+        versions.add(initalVersionLabel);
         comboBox2 = new JComboBox();
+        comboBox2.setBackground(new Color(-3154465));
+        comboBox2.setForeground(new Color(-16777216));
         final DefaultComboBoxModel defaultComboBoxModel2 = new DefaultComboBoxModel();
         defaultComboBoxModel2.addElement("1.8");
         defaultComboBoxModel2.addElement("1.9");
         defaultComboBoxModel2.addElement("1.10");
+        defaultComboBoxModel2.addElement("1.10.1");
+        defaultComboBoxModel2.addElement("1.10.2");
         defaultComboBoxModel2.addElement("1.11");
         defaultComboBoxModel2.addElement("1.11.1");
         defaultComboBoxModel2.addElement("1.11.2");
+        defaultComboBoxModel2.addElement("1.11.1");
+        defaultComboBoxModel2.addElement("1.11.2");
+        defaultComboBoxModel2.addElement("1.12");
+        defaultComboBoxModel2.addElement("1.12.1");
         defaultComboBoxModel2.addElement("1.12.2");
         defaultComboBoxModel2.addElement("1.13");
         defaultComboBoxModel2.addElement("1.13.1");
@@ -181,23 +250,47 @@ public class Main {
         defaultComboBoxModel2.addElement("1.16.4");
         defaultComboBoxModel2.addElement("1.16.5");
         comboBox2.setModel(defaultComboBoxModel2);
-        RPC.add(comboBox2);
-        finalVersionTextPane = new JTextPane();
-        finalVersionTextPane.setText("Final Version");
-        RPC.add(finalVersionTextPane);
+        versions.add(comboBox2);
+        finalVersionLabel = new JLabel();
+        finalVersionLabel.setBackground(new Color(-3154465));
+        finalVersionLabel.setForeground(new Color(-16777216));
+        finalVersionLabel.setText("Final Version");
+        versions.add(finalVersionLabel);
         minifyCheckBox = new JCheckBox();
+        minifyCheckBox.setBackground(new Color(-3154465));
+        minifyCheckBox.setForeground(new Color(-16777216));
         minifyCheckBox.setText("Minify");
-        RPC.add(minifyCheckBox);
+        options.add(minifyCheckBox);
         convertResourcePackButton = new JButton();
+        convertResourcePackButton.setBackground(new Color(-3154465));
+        convertResourcePackButton.setForeground(new Color(-16777216));
         convertResourcePackButton.setText("Convert Resource Pack");
-        RPC.add(convertResourcePackButton);
-        consoleOutputTextArea = new JTextArea(20, 40);
-        consoleOutputTextArea.setText("Console Output:");
-        consoleOutputTextArea.setWrapStyleWord(true);
-        consoleOutputTextArea.setLineWrap(true);
-        RPC.add(new JScrollPane(consoleOutputTextArea));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        RPC.add(convertResourcePackButton, gbc);
+    }
 
-        //RPC.add(consoleOutputTextArea);
+    /**
+     * @noinspection ALL
+     */
+    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
+        if (currentFont == null) return null;
+        String resultName;
+        if (fontName == null) {
+            resultName = currentFont.getName();
+        } else {
+            Font testFont = new Font(fontName, Font.PLAIN, 10);
+            if (testFont.canDisplay('a') && testFont.canDisplay('1')) {
+                resultName = fontName;
+            } else {
+                resultName = currentFont.getName();
+            }
+        }
+        Font font = new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
+        boolean isMac = System.getProperty("os.name", "").toLowerCase(Locale.ENGLISH).startsWith("mac");
+        Font fontWithFallback = isMac ? new Font(font.getFamily(), font.getStyle(), font.getSize()) : new StyleContext().getFont(font.getFamily(), font.getStyle(), font.getSize());
+        return fontWithFallback instanceof FontUIResource ? fontWithFallback : new FontUIResource(fontWithFallback);
     }
 
     /**
@@ -206,4 +299,5 @@ public class Main {
     public JComponent $$$getRootComponent$$$() {
         return RPC;
     }
+
 }
