@@ -208,6 +208,7 @@ public class Main {
         defaultComboBoxModel1.addElement("1.16.3");
         defaultComboBoxModel1.addElement("1.16.4");
         defaultComboBoxModel1.addElement("1.16.5");
+        defaultComboBoxModel1.addElement("1.17");
         comboBox1.setModel(defaultComboBoxModel1);
         versions.add(comboBox1);
         initalVersionLabel = new JLabel();
@@ -249,6 +250,7 @@ public class Main {
         defaultComboBoxModel2.addElement("1.16.3");
         defaultComboBoxModel2.addElement("1.16.4");
         defaultComboBoxModel2.addElement("1.16.5");
+        defaultComboBoxModel2.addElement("1.17");
         comboBox2.setModel(defaultComboBoxModel2);
         versions.add(comboBox2);
         finalVersionLabel = new JLabel();
