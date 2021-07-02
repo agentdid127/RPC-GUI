@@ -20,6 +20,7 @@ public class Main {
 
     String from = "1.8";
     String to = "1.8";
+    String light = "none";
     boolean minify = false;
     private JPanel RPC;
     private JPanel options;
@@ -34,42 +35,30 @@ public class Main {
     private JLabel finalVersionLabel;
     private JPanel console;
     private JTextArea textArea1;
+    private JComboBox comboBox3;
 
     public Main() {
         convertResourcePackButton.addActionListener(e -> {
 
             redirectSystemStreams();
 
-            ArrayList<String> argSetup = new ArrayList<>();
-
-            argSetup.add("--from");
-            argSetup.add(comboBox1.getSelectedItem().toString());
-            argSetup.add("--to");
-            argSetup.add(comboBox2.getSelectedItem().toString());
+            from = comboBox1.getSelectedItem().toString();
+            to = comboBox2.getSelectedItem().toString();
+            light = comboBox3.getSelectedItem().toString();
 
             minify = minifyCheckBox.isSelected();
-            if (minify) argSetup.add("--minify");
 
 
-            String[] args = new String[argSetup.size()];
+                new Thread(() -> {
+                    try {
+                        new PackConverter(from, to, light, minify).run();
+                    }
+                    catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }).start();
 
-            for (int i = 0; i < argSetup.size(); i++) {
-                args[i] = argSetup.get(i);
-                System.out.println(args[i]);
-            }
 
-
-            try {
-                OptionSet optionSet = Options.PARSER.parse(args);
-                if (optionSet.has(Options.HELP)) {
-                    Options.PARSER.printHelpOn(System.out);
-                    return;
-                }
-
-                new PackConverter(optionSet).run();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
 
         });
     }
