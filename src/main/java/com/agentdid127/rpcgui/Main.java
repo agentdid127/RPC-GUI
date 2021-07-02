@@ -20,6 +20,7 @@ public class Main {
 
     String from = "1.8";
     String to = "1.8";
+    String light = "none";
     boolean minify = false;
     private JPanel RPC;
     private JPanel options;
@@ -34,42 +35,48 @@ public class Main {
     private JLabel finalVersionLabel;
     private JPanel console;
     private JTextArea textArea1;
+    private JComboBox comboBox3;
 
     public Main() {
         convertResourcePackButton.addActionListener(e -> {
 
             redirectSystemStreams();
 
-            ArrayList<String> argSetup = new ArrayList<>();
-
-            argSetup.add("--from");
-            argSetup.add(comboBox1.getSelectedItem().toString());
-            argSetup.add("--to");
-            argSetup.add(comboBox2.getSelectedItem().toString());
+            from = comboBox1.getSelectedItem().toString();
+            to = comboBox2.getSelectedItem().toString();
+            light = comboBox3.getSelectedItem().toString();
 
             minify = minifyCheckBox.isSelected();
-            if (minify) argSetup.add("--minify");
 
+            ArrayList<String> options = new ArrayList<>();
+            options.add("--from");
+            options.add(from);
+            options.add("--to");
+            options.add(to);
 
-            String[] args = new String[argSetup.size()];
+            if (minify) options.add("--minify");
 
-            for (int i = 0; i < argSetup.size(); i++) {
-                args[i] = argSetup.get(i);
-                System.out.println(args[i]);
+            options.add("--light");
+            options.add(light);
+
+            String[] args = new String[options.size()];
+            for (int i = 0; i < options.size(); i++) {
+                args[i] = options.get(i);
             }
 
 
-            try {
-                OptionSet optionSet = Options.PARSER.parse(args);
-                if (optionSet.has(Options.HELP)) {
-                    Options.PARSER.printHelpOn(System.out);
+            new Thread(() -> {
+                try {
+                    OptionSet optionSet = Options.PARSER.parse(args);
+
+                    new PackConverter(optionSet).run();
+                    return;
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
                     return;
                 }
+            }).start();
 
-                new PackConverter(optionSet).run();
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
 
         });
     }
@@ -86,11 +93,7 @@ public class Main {
 
     //The following codes set where the text get redirected. In this case, jTextArea1
     private void updateTextArea(final String text) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                textArea1.append(text);
-            }
-        });
+        SwingUtilities.invokeLater(() -> textArea1.append(text));
     }
 
     //Followings are The Methods that do the Redirect, you can simply Ignore them.
@@ -209,6 +212,7 @@ public class Main {
         defaultComboBoxModel1.addElement("1.16.4");
         defaultComboBoxModel1.addElement("1.16.5");
         defaultComboBoxModel1.addElement("1.17");
+        defaultComboBoxModel1.addElement("1.17.1");
         comboBox1.setModel(defaultComboBoxModel1);
         versions.add(comboBox1);
         initalVersionLabel = new JLabel();
@@ -251,6 +255,7 @@ public class Main {
         defaultComboBoxModel2.addElement("1.16.4");
         defaultComboBoxModel2.addElement("1.16.5");
         defaultComboBoxModel2.addElement("1.17");
+        defaultComboBoxModel2.addElement("1.17.1");
         comboBox2.setModel(defaultComboBoxModel2);
         versions.add(comboBox2);
         finalVersionLabel = new JLabel();
@@ -263,6 +268,19 @@ public class Main {
         minifyCheckBox.setForeground(new Color(-16777216));
         minifyCheckBox.setText("Minify");
         options.add(minifyCheckBox);
+        comboBox3 = new JComboBox();
+        comboBox3.setBackground(new Color(-3154465));
+        comboBox3.setForeground(new Color(-16777216));
+        final DefaultComboBoxModel defaultComboBoxModel3 = new DefaultComboBoxModel();
+        defaultComboBoxModel3.addElement("none");
+        defaultComboBoxModel3.addElement("front");
+        defaultComboBoxModel3.addElement("side");
+        comboBox3.setModel(defaultComboBoxModel3);
+        options.add(comboBox3);
+        final JLabel label1 = new JLabel();
+        label1.setForeground(new Color(-16777216));
+        label1.setText("Light");
+        options.add(label1);
         convertResourcePackButton = new JButton();
         convertResourcePackButton.setBackground(new Color(-3154465));
         convertResourcePackButton.setForeground(new Color(-16777216));

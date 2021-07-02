@@ -111,6 +111,7 @@
                     <item value="1.16.4"/>
                     <item value="1.16.5"/>
                     <item value="1.17"/>
+                    <item value="1.17.1"/>
                   </model>
                 </properties>
               </component>
@@ -159,6 +160,7 @@
                     <item value="1.16.4"/>
                     <item value="1.16.5"/>
                     <item value="1.17"/>
+                    <item value="1.17.1"/>
                   </model>
                 </properties>
               </component>
@@ -178,6 +180,25 @@
               <background color="-3154465"/>
               <foreground color="-16777216"/>
               <text value="Minify"/>
+            </properties>
+          </component>
+          <component id="aaa45" class="javax.swing.JComboBox" binding="comboBox3" default-binding="true">
+            <constraints/>
+            <properties>
+              <background color="-3154465"/>
+              <foreground color="-16777216"/>
+              <model>
+                <item value="none"/>
+                <item value="front"/>
+                <item value="side"/>
+              </model>
+            </properties>
+          </component>
+          <component id="e6245" class="javax.swing.JLabel">
+            <constraints/>
+            <properties>
+              <foreground color="-16777216"/>
+              <text value="Light"/>
             </properties>
           </component>
         </children>

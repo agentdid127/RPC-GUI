@@ -6,7 +6,7 @@
 
     <groupId>com.agentdid127</groupId>
     <artifactId>RPC-GUI</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -80,7 +80,7 @@
         <dependency>
             <groupId>com.github.agentdid127</groupId>
             <artifactId>ResourcePackConverter</artifactId>
-            <version>1.6.0</version>
+            <version>release-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
