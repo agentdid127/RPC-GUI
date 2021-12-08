@@ -1,6 +1,7 @@
 # Resource Pack Converter GUI
 ## Update: As of v2.0, the source for this has moved to agentdid127/ResourcePackConverter. You can still download the finished project from here as of now.
 ### Current version: 2.0.2
+### Current Snapshot: 2.1.0-pre1
 
 This is a software that allows you to use the Resource Pack Converter with a GUI.
 
